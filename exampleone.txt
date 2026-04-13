@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Tadeo</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="toolbar">
+        <div class="my-logo">My Logo</div>
+        <div class="vectorcontainer">
+            <div class="vector vector1"></div>
+            <div class="vector vector2"></div>
+            <div class="vector vector3"></div>
+        </div>
+    </div>
+    <div id="f1" class="frameworks">Tadeo</div>
+    <div id="f2" class="frameworks">Tadeo</div>
+    <div id="f3" class="frameworks">Tadeo</div>
+
+    <!-- <div class="toolbar">
+        <div class="normal-button">
+            <div class="icons">
+                <div class="union">
+                </div>
+            </div>
+        </div>
+    </div> -->
+</body>
+</html>
