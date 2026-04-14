@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    width: 375px;
+}
+
 .frameworks {
     font-family: Inter;
     font-weight: 700;
@@ -50,7 +54,7 @@
 
 .vector1 {
     top: 20px;
-    
+
     display: block;
 }
 
@@ -60,11 +64,10 @@
 
 .vector3 {
     top: 4px;
-    
+
 }
 
 .toolbar {
-    width: 375px;
     height: 48px;
     background-color: #181E25;
     display: flex;
@@ -84,7 +87,6 @@
     height: 40px;
     top: 4px;
     left: 311px;
-    
     opacity: 1;
     border-radius: 8px;
     padding: 8px;
@@ -93,7 +95,6 @@
 .icons {
     width: 24px;
     height: 24px;
-    
     opacity: 1;
 }
 
@@ -102,7 +103,90 @@
     height: 12px;
     top: 6px;
     left: 3px;
-    
     opacity: 1;
 }
 
+.nav {
+    display: none;
+}
+
+.greetings {
+
+    width: 375;
+    height: 590px;
+    top: 92px;
+    gap: 12px;
+    angle: 0 deg;
+    opacity: 1;
+    padding-top: 120px;
+    padding-right: 24px;
+    padding-bottom: 120px;
+    padding-left: 24px;
+    background: #1C1A19;
+}
+
+.primary {
+    width: 327;
+    height: 124;
+    opacity: 1;
+    font-family: Crete Round;
+    font-weight: 400;
+    font-size: 56px;
+    leading-trim: NONE;
+    line-height: 64px;
+    letter-spacing: 0.37px;
+    color: #FF6B00;
+}
+
+.supporting-text {
+    width: 327;
+    height: 27;
+    angle: 0 deg;
+    opacity: 1;
+    font-family: Roboto;
+    font-weight: 700;
+    font-size: 24px;
+    leading-trim: NONE;
+    line-height: 32px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #FFF5E1;
+}
+
+.description {
+    width: 327px;
+    height: 123px;
+    opacity: 1;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: 0%;
+    color: #FFFFFF;
+}
+
+.Social-media {
+    width: 200px;
+    height: 40px;
+    angle: 0 deg;
+    opacity: 1;
+}
+
+.hola {
+    width: 40px;
+    height: 40px;
+    opacity: 1;
+    border-radius: 8px;
+    padding: 8px;
+
+}
+
+.iconos {
+    width: 40;
+    height: 40;
+    opacity: 1;
+    border-radius: 8px;
+    padding: 8px;
+
+}
