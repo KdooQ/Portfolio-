@@ -69,7 +69,7 @@ body {
 
 .toolbar {
     height: 48px;
-    background-color: #181E25;
+    background-color: #1A2F4A;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -122,29 +122,29 @@ body {
     padding-right: 24px;
     padding-bottom: 120px;
     padding-left: 24px;
-    background: #1C1A19;
+    background: #01061d;
 }
 
 .primary {
-    width: 327;
-    height: 124;
+    width: 327px;
+    height: 124px;
     opacity: 1;
     font-family: Crete Round;
-    font-weight: 400;
+    font-weight: 400px;
     font-size: 56px;
     leading-trim: NONE;
     line-height: 64px;
     letter-spacing: 0.37px;
-    color: #FF6B00;
+    color: #406956;
 }
 
 .supporting-text {
-    width: 327;
-    height: 27;
+    width: 327px;
+    height: 27px;
     angle: 0 deg;
     opacity: 1;
     font-family: Roboto;
-    font-weight: 700;
+    font-weight: 700px;
     font-size: 24px;
     leading-trim: NONE;
     line-height: 32px;
@@ -163,14 +163,14 @@ body {
     leading-trim: NONE;
     line-height: 24px;
     letter-spacing: 0%;
-    color: #FFFFFF;
+    color: #ececec;
 }
 
 .Social-media {
-    width: 200px;
-    height: 40px;
-    angle: 0 deg;
-    opacity: 1;
+    width: 160x;
+    height: 60px;
+    outline: auto; 
+
 }
 
 .hola {
@@ -179,14 +179,12 @@ body {
     opacity: 1;
     border-radius: 8px;
     padding: 8px;
-
+    
 }
 
-.iconos {
-    width: 40;
-    height: 40;
-    opacity: 1;
-    border-radius: 8px;
-    padding: 8px;
-
+.fa-brands {
+    font-size: 20px;
+    color: #d0d7d0;
 }
+
+
