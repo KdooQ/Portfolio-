@@ -1,5 +1,5 @@
 * {
-    /* outline: auto; */
+    outline: auto; 
     /* display: none; */
     box-sizing: border-box;
 }
@@ -169,7 +169,6 @@ body {
 .Social-media {
     width: 160x;
     height: 60px;
-    outline: auto; 
 
 }
 
