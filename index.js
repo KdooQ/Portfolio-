@@ -1,5 +1,5 @@
 /* ============================================================
-   📅 AÑO AUTOMÁTICO EN EL FOOTER
+   AÑO AUTOMÁTICO EN EL FOOTER
    Busca el elemento con id="year" y pone el año actual.
    Así no tienes que actualizarlo manualmente cada año.
    ============================================================ */
@@ -7,7 +7,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 
 /* ============================================================
-   📱 MENÚ DE NAVEGACIÓN (versión móvil)
+   MENÚ DE NAVEGACIÓN (versión móvil)
 
    Cómo funciona:
    1. El botón #menuToggle tiene un ícono de Font Awesome
@@ -15,6 +15,8 @@ document.getElementById('year').textContent = new Date().getFullYear();
    3. El CSS muestra u oculta el menú según esa clase
    4. El ícono cambia entre ☰ (abierto) y ✕ (cerrado)
    ============================================================ */
+
+
 const menuToggle = document.getElementById('menuToggle');
 const nav = document.getElementById('nav');
 const menuIcon = document.getElementById('menuIcon');
@@ -53,7 +55,7 @@ nav.querySelectorAll('a').forEach(link => {
 
 
 /* ============================================================
-   🔵 ENLACE ACTIVO EN EL MENÚ AL HACER SCROLL
+   ENLACE ACTIVO EN EL MENÚ AL HACER SCROLL
 
    Cómo funciona:
    1. Escucha el evento "scroll" de la ventana
