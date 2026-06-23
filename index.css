@@ -1,108 +1,915 @@
+/* ============================================================
+   🎨 VARIABLES DE COLOR — cambia los colores aquí globalmente
+   Cada variable se usa en todo el sitio. Edita un valor y
+   cambia el color en todo el sitio al mismo tiempo.
+   ============================================================ */
+:root {
+    --green:       #4CAF82;   /* verde claro — acento principal (botones, títulos hero) */
+    --sky:         #5BB8D4;   /* azul cielo — acento secundario (tags, bordes) */
+    --dark-blue:   #1A2F4A;   /* azul oscuro — navbar y fondos de cards */
+    --black:       #0D1117;   /* casi negro — fondo principal del sitio */
+    --surface:     #111827;   /* gris oscuro — fondo de secciones alternas */
+    --card:        #1C2A3A;   /* fondo de tarjetas de servicios/portfolio */
+    --text:        #E8F0F7;   /* texto principal — claro sobre fondo oscuro */
+    --text-muted:  #8A9BB0;   /* texto secundario — descripciones, subtítulos */
+    --border:      #1E3048;   /* color de bordes de tarjetas */
+}
+
+/* ============================================================
+   🔄 RESET & BASE
+   Elimina márgenes y paddings por defecto del navegador
+   ============================================================ */
 * {
-    /* outline: auto; */
-    /* display: none; */
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.frameworks {
-    font-family: Inter;
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 44px;
-    letter-spacing: 0%;
-    text-align: center;
-    vertical-align: middle;
+html {
+    /*
+    ┌──────────────────────────────────────────────────────┐
+    │  DESLIZ SUAVE AL NAVEGAR                             │
+    │  Esta línea hace que al hacer clic en un enlace      │
+    │  del menú, la página se deslice suavemente en lugar  │
+    │  de teletransportarse. No la elimines.               │
+    └──────────────────────────────────────────────────────┘
+    */
+    scroll-behavior: smooth;
 }
 
-#f1 {
-    color: #FF6B00;
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--black);
+    color: var(--text);
+    /*
+    ┌──────────────────────────────────────────────────────┐
+    │  ANCHO MÁXIMO EN MÓVIL                              │
+    │  En móvil el sitio tiene max 480px centrado.        │
+    │  En desktop se sobreescribe a 100% con el @media    │
+    └──────────────────────────────────────────────────────┘
+    */
+    max-width: 480px;
+    margin: 0 auto;
 }
 
-#f2 {
-    color: #1e617b;
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
-#f3 {
-    color: #08be0e;
-}
-
-#f4 {
-    color: #bc2196;
-}
-
-.vectorcontainer {
-    width: 18px;
-    height: 18px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-.vector {
-    width: 16px;
-    height: 2px;
-    left: 4px;
-    opacity: 1;
-    border-width: 2px;
-    background-color: #ACB7C3;
-    /* outline: auto; */
-}
-
-.vector1 {
-    top: 20px;
-    
-    display: block;
-}
-
-.vector2 {
-    top: 12px;
-}
-
-.vector3 {
-    top: 4px;
-    
+/* ============================================================
+   🔝 HEADER & NAVBAR
+   ============================================================ */
+header {
+    position: sticky;   /* se queda fijo arriba al hacer scroll */
+    top: 0;
+    z-index: 100;       /* aparece por encima de todo el contenido */
+    background-color: var(--dark-blue);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
 }
 
 .toolbar {
-    width: 375px;
-    height: 48px;
-    background-color: #181E25;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 0 20px;
 }
 
+/*
+┌──────────────────────────────────────────────────────────────┐
+│  LOGO EN LA NAVBAR                                           │
+│  Contiene el nombre y el subtítulo "Developer"              │
+│  .logo-name  → el nombre principal (ej: "Tadeo")            │
+│  .logo-dot   → el punto verde después del nombre            │
+│  .logo-role  → la palabra "Developer" más pequeña          │
+└──────────────────────────────────────────────────────────────┘
+*/
 .my-logo {
-    color: white;
-    top: 5px;
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
 }
 
-.normal-button {
+.logo-name {
+    font-family: 'Crete Round', serif;
+    font-size: 20px;
+    color: var(--text);
+    letter-spacing: 0.5px;
+}
+
+.logo-dot {
+    color: var(--green);
+    font-family: 'Crete Round', serif;
+    font-size: 20px;
+}
+
+.logo-role {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sky);
+    margin-left: 8px;
+}
+
+/*
+┌──────────────────────────────────────────────────────────────┐
+│  BOTÓN DE MENÚ (versión móvil)                              │
+│  Solo visible en móvil. En desktop se oculta con @media.    │
+│  El ícono cambia entre fa-bars (cerrado) y fa-xmark         │
+│  (abierto) mediante JavaScript en index.js                  │
+│                                                             │
+│  HOVER: al pasar el mouse encima el ícono cambia a verde    │
+│  (controlado por .menu-toggle:hover i)                      │
+└──────────────────────────────────────────────────────────────┘
+*/
+.menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: var(--text-muted);
+    font-size: 20px;
+    line-height: 1;
+    transition: color 0.2s;   /* transición suave del color al hacer hover */
+}
+
+/* Al pasar el mouse: el ícono del menú se vuelve verde */
+.menu-toggle:hover i {
+    color: var(--green);
+}
+
+/*
+┌──────────────────────────────────────────────────────────────┐
+│  MENÚ DE NAVEGACIÓN                                          │
+│  Por defecto está oculto (display: none).                   │
+│  Cuando el JS agrega la clase "open", se muestra.           │
+└──────────────────────────────────────────────────────────────┘
+*/
+.nav {
+    display: none;
+    flex-direction: column;
+    background-color: var(--dark-blue);
+    border-top: 1px solid var(--border);
+    padding: 12px 0;
+}
+
+.nav.open {
+    display: flex;
+}
+
+.nav a {
+    padding: 12px 24px;
+    font-size: 15px;
+    color: var(--text-muted);
+    transition: color 0.2s, background 0.2s;
+}
+
+/*
+┌──────────────────────────────────────────────────────────────┐
+│  HOVER EN LINKS DEL MENÚ                                     │
+│  Al pasar el mouse: texto verde + fondo verde muy sutil     │
+└──────────────────────────────────────────────────────────────┘
+*/
+.nav a:hover {
+    color: var(--green);
+    background-color: rgba(76, 175, 130, 0.07);
+}
+
+/* Clase .active que agrega JavaScript al enlace de la sección actual */
+.nav a.active {
+    color: var(--green);
+    font-weight: 600;
+}
+
+/* ============================================================
+   📐 ESTILOS COMPARTIDOS POR TODAS LAS SECCIONES
+   ============================================================ */
+section {
+    padding: 72px 24px;
+}
+
+/* Etiqueta pequeña encima del título (ej: "What I offer") */
+.section-tag {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sky);
+    margin-bottom: 8px;
+}
+
+/* Título grande de cada sección */
+.section-title {
+    font-family: 'Crete Round', serif;
+    font-size: 32px;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 32px;
+}
+
+/* ============================================================
+   🔘 BOTONES
+   ⚠️  NO CAMBIES LAS CLASES, solo el contenido de texto
+       si necesitas. Los estilos de hover están aquí.
+   ============================================================ */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    /*
+    ┌──────────────────────────────────────────────────────┐
+    │  TRANSICIÓN EN BOTONES                              │
+    │  Al pasar el mouse, el botón sube 2px (transform)  │
+    │  y se vuelve ligeramente transparente (opacity).    │
+    │  La propiedad "transition" controla qué tan suave  │
+    │  es ese efecto (0.15s = 150 milisegundos).         │
+    └──────────────────────────────────────────────────────┘
+    */
+    transition: transform 0.15s, opacity 0.15s;
+    cursor: pointer;
+}
+
+/* HOVER EN TODOS LOS BOTONES: se elevan y bajan un poco la opacidad */
+.btn:hover {
+    transform: translateY(-2px);   /* sube 2px hacia arriba */
+    opacity: 0.9;                  /* se vuelve 10% transparente */
+}
+
+/* Botón principal — fondo verde, texto negro */
+.btn-primary {
+    background-color: var(--green);
+    color: #0D1117;
+}
+
+/* Botón outline — solo borde azul, sin fondo */
+.btn-outline {
+    border: 2px solid var(--sky);
+    color: var(--sky);
+}
+
+/* Botón pequeño en cards de proyectos */
+.btn-small {
+    padding: 8px 16px;
+    font-size: 13px;
+    background-color: var(--green);
+    color: #0D1117;
+    border-radius: 6px;
+    /*
+    ┌──────────────────────────────────────────────────────┐
+    │  HOVER EN BOTONES PEQUEÑOS (btn-small):             │
+    │  Al pasar el mouse, se elevan igual que los demás   │
+    │  gracias a que heredan .btn:hover                   │
+    └──────────────────────────────────────────────────────┘
+    */
+}
+
+/* ============================================================
+   🏠 HERO — SECCIÓN DE PRESENTACIÓN
+   En móvil: columna única
+   En desktop: dos columnas (texto | imagen)
+   ============================================================ */
+.greetings {
+    background: var(--surface);
+
+    /*
+    ┌────────────────────────────────────────────────────────────┐
+    │  IMAGEN DE FONDO EN LA SECCIÓN HERO (opcional)           │
+    │                                                            │
+    │  Para añadir una imagen de fondo:                         │
+    │  1. Descomenta las líneas background-image,               │
+    │     background-size, background-position                  │
+    │  2. Cambia "assets/hero-bg.jpg" por tu imagen            │
+    │  3. Ajusta el overlay (el color semitransparente)         │
+    │     cambiando el rgba en linear-gradient                  │
+    │                                                            │
+    │  El overlay oscuro encima de la imagen se logra con       │
+    │  linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7))       │
+    │  El 0.7 es la opacidad — entre 0 (sin overlay) y 1       │
+    │  (totalmente negro). Ajústalo a tu gusto.                 │
+    │                                                            │
+    │  EJEMPLO DE USO:                                          │
+    │  background-image:                                        │
+    │    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),    │
+    │    url('assets/hero-bg.jpg');                             │
+    └────────────────────────────────────────────────────────────┘
+    */
+    /* background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/hero-bg.jpg'); */
+    /* background-size: cover; */        /* la imagen cubre toda la sección */
+    /* background-position: center; */  /* centra la imagen */
+
+    padding-top: 64px;
+    padding-bottom: 64px;
+    display: flex;
+    flex-direction: column;   /* en móvil: apilado verticalmente */
+    gap: 16px;
+}
+
+/* Columna de texto del hero */
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/*
+┌──────────────────────────────────────────────────────────────┐
+│  COLUMNA VISUAL DEL HERO (foto + stats)                     │
+│  En móvil: oculta (display: none)                           │
+│  En desktop: visible, a la derecha del texto                │
+└──────────────────────────────────────────────────────────────┘
+*/
+.hero-visual {
+    display: none;   /* oculta en móvil — se muestra en @media desktop */
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Marco contenedor de la imagen */
+.hero-image-frame {
+    position: relative;
+    width: 320px;
+    height: 380px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid var(--green);
+    background-color: var(--card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+/* Imagen real dentro del marco */
+.hero-image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* recorta la imagen para llenar el marco */
+}
+
+/* Placeholder mientras no hay foto */
+.hero-avatar-placeholder {
+    font-size: 80px;
+    color: var(--text-muted);
+    opacity: 0.4;
+}
+
+/* Decoración geométrica detrás del marco de foto */
+.hero-image-decoration {
+    position: absolute;
+    width: 320px;
+    height: 380px;
+    border-radius: 20px;
+    border: 2px solid var(--sky);
+    top: 16px;
+    left: 16px;
+    z-index: 0;
+    opacity: 0.4;
+}
+
+/*
+┌──────────────────────────────────────────────────────────────┐
+│  TARJETAS FLOTANTES DE ESTADÍSTICAS                         │
+│  Las pequeñas tarjetas con números al lado de la foto.      │
+│  .hero-stat--top  → arriba a la izquierda                   │
+│  .hero-stat--bottom → abajo a la derecha                    │
+│  Para cambiar los datos: edita el HTML del hero-stat        │
+└──────────────────────────────────────────────────────────────┘
+*/
+.hero-stat {
+    position: absolute;
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    z-index: 2;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.hero-stat--top {
+    top: -10px;
+    left: -30px;
+}
+
+.hero-stat--bottom {
+    bottom: -10px;
+    right: -30px;
+}
+
+.stat-number {
+    font-family: 'Crete Round', serif;
+    font-size: 22px;
+    color: var(--green);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+/* Etiqueta pequeña encima del nombre */
+.greeting-tag {
+    font-size: 14px;
+    color: var(--sky);
+}
+
+/* Nombre principal en grande */
+.primary {
+    font-family: 'Crete Round', serif;
+    font-size: 48px;
+    line-height: 1.15;
+    color: var(--green);
+}
+
+/* Subtítulo "Software Developer" */
+.supporting-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+/* Párrafo de descripción */
+.description {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    max-width: 340px;
+}
+
+/* Fila de botones CTA */
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+/* Fila de íconos sociales */
+.Social-media {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+/*
+┌──────────────────────────────────────────────────────────────┐
+│  ÍCONOS DE REDES SOCIALES                                   │
+│  Cuadrado redondeado con ícono de Font Awesome              │
+│  HOVER: fondo más oscuro + ícono verde                      │
+└──────────────────────────────────────────────────────────────┘
+*/
+.social-icon {
     width: 40px;
     height: 40px;
-    top: 4px;
-    left: 311px;
-    
-    opacity: 1;
     border-radius: 8px;
-    padding: 8px;
+    background-color: var(--card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 18px;
+    transition: color 0.2s, background 0.2s;
 }
 
-.icons {
-    width: 24px;
-    height: 24px;
-    
-    opacity: 1;
+/* Al pasar el mouse en íconos sociales: ícono verde + fondo oscuro */
+.social-icon:hover {
+    color: var(--green);
+    background-color: var(--dark-blue);
 }
 
-.union {
-    width: 18px;
-    height: 12px;
-    top: 6px;
-    left: 3px;
-    
-    opacity: 1;
+/* ============================================================
+   🛠️ SECCIÓN SERVICIOS
+   ============================================================ */
+.services {
+    background-color: var(--black);
+
+    /*
+    ┌────────────────────────────────────────────────────────────┐
+    │  FONDO CON IMAGEN EN SERVICIOS (opcional)                 │
+    │  Mismo proceso que en el hero. Descomenta y cambia la URL │
+    │                                                            │
+    │  background-image:                                        │
+    │    linear-gradient(rgba(13,17,23,0.9), rgba(13,17,23,0.9)),│
+    │    url('assets/services-bg.jpg');                         │
+    │  background-size: cover;                                  │
+    │  background-position: center;                             │
+    └────────────────────────────────────────────────────────────┘
+    */
 }
 
+.services-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/*
+┌──────────────────────────────────────────────────────────────┐
+│  TARJETAS DE SERVICIO                                        │
+│  HOVER: borde cambia a verde + sube 3px                     │
+└──────────────────────────────────────────────────────────────┘
+*/
+.service-card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+/* Al pasar el mouse sobre una tarjeta de servicio: borde verde + sube */
+.service-card:hover {
+    border-color: var(--green);
+    transform: translateY(-3px);
+}
+
+/* Variante: tarjeta "próximamente" — aparece semitransparente */
+.service-card--coming {
+    opacity: 0.6;
+}
+
+/* Círculo con ícono dentro de la tarjeta */
+.service-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background-color: rgba(76, 175, 130, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--green);
+}
+
+.service-card h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.service-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Badge "Soon" en tarjetas de servicio no disponibles */
+.badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background-color: var(--sky);
+    color: var(--black);
+    padding: 2px 7px;
+    border-radius: 20px;
+}
+
+/* ============================================================
+   💼 SECCIÓN PORTFOLIO
+   ============================================================ */
+.portfolio-section {
+    background-color: var(--surface);
+
+    /*
+    ┌────────────────────────────────────────────────────────────┐
+    │  FONDO CON IMAGEN EN PORTFOLIO (opcional)                 │
+    │  Descomenta y personaliza:                                │
+    │                                                            │
+    │  background-image:                                        │
+    │    linear-gradient(rgba(17,24,39,0.92), rgba(17,24,39,0.92)),│
+    │    url('assets/portfolio-bg.jpg');                        │
+    │  background-size: cover;                                  │
+    │  background-position: center;                             │
+    │  background-attachment: fixed; ← efecto parallax (opcional)│
+    └────────────────────────────────────────────────────────────┘
+    */
+}
+
+.portfolio-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/*
+┌──────────────────────────────────────────────────────────────┐
+│  TARJETAS DE PROYECTO                                        │
+│  HOVER: borde cambia a azul cielo + sube 3px               │
+└──────────────────────────────────────────────────────────────┘
+*/
+.project-card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+/* Al pasar el mouse sobre un proyecto: borde azul + sube */
+.project-card:hover {
+    border-color: var(--sky);
+    transform: translateY(-3px);
+}
+
+/* Variante: proyecto "próximamente" — semitransparente */
+.project-card--empty {
+    opacity: 0.45;
+}
+
+/* Zona de imagen del proyecto */
+.project-thumb {
+    height: 160px;
+    background-color: var(--dark-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* recorta la captura para llenar el espacio */
+}
+
+/* Ícono placeholder cuando no hay captura */
+.project-placeholder {
+    font-size: 40px;
+    color: var(--border);
+}
+
+/* Zona de texto debajo de la imagen */
+.project-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.project-info h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.project-info p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Fila de etiquetas de tecnología usada en el proyecto */
+.project-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.project-tags span {
+    font-size: 11px;
+    font-weight: 600;
+    background-color: rgba(91, 184, 212, 0.12);
+    color: var(--sky);
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+/* ============================================================
+   👤 SECCIÓN ABOUT
+   ============================================================ */
+.about {
+    background-color: var(--black);
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Foto de perfil circular */
+.about-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: var(--card);
+    border: 3px solid var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.about-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-placeholder {
+    font-size: 40px;
+    color: var(--text-muted);
+}
+
+.about-text {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.about-text p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+/* Contenedor de etiquetas de habilidades */
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+/* Etiqueta verde = habilidad dominada */
+.skill-tag {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 20px;
+    background-color: rgba(76, 175, 130, 0.12);
+    color: var(--green);
+    border: 1px solid rgba(76, 175, 130, 0.3);
+}
+
+/* Etiqueta azul = habilidad en aprendizaje */
+.skill-tag--learning {
+    background-color: rgba(91, 184, 212, 0.1);
+    color: var(--sky);
+    border-color: rgba(91, 184, 212, 0.3);
+}
+
+/* ============================================================
+   📬 SECCIÓN CONTACTO
+   ============================================================ */
+.contact {
+    background-color: var(--surface);
+    text-align: center;
+}
+
+.contact-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    margin-top: -16px;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/*
+┌──────────────────────────────────────────────────────────────┐
+│  ITEMS DE CONTACTO                                           │
+│  HOVER: borde verde + texto más claro                        │
+└──────────────────────────────────────────────────────────────┘
+*/
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    color: var(--text-muted);
+    font-size: 14px;
+    transition: border-color 0.2s, color 0.2s;
+    text-align: left;
+}
+
+.contact-item i {
+    font-size: 18px;
+    color: var(--green);
+    width: 22px;
+}
+
+/* Al pasar el mouse en contacto: borde verde + texto claro */
+.contact-item:hover {
+    border-color: var(--green);
+    color: var(--text);
+}
+
+/* ============================================================
+   📄 FOOTER
+   ============================================================ */
+footer {
+    background-color: var(--dark-blue);
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* ============================================================
+   🖥️ ESTILOS DESKTOP (tablet y computadora)
+   Se aplican cuando el ancho es mayor a 768px
+   Aquí el layout cambia a dos columnas en el hero,
+   grilla en servicios y portfolio, etc.
+   ============================================================ */
+@media (min-width: 768px) {
+    body {
+        max-width: 100%;
+    }
+
+    section {
+        padding: 80px 64px;
+    }
+
+    /* Hero en desktop: fila con texto a la izquierda e imagen a la derecha */
+    .greetings {
+        flex-direction: row;       /* cambia de columna a fila */
+        align-items: center;
+        justify-content: space-between;
+        gap: 48px;
+        padding: 80px 64px;
+        min-height: 90vh;         /* ocupa casi toda la altura de la pantalla */
+    }
+
+    .hero-text {
+        max-width: 520px;
+        flex: 1;
+    }
+
+    /* En desktop se muestra la columna visual (foto + stats) */
+    .hero-visual {
+        display: flex;
+        flex: 0 0 auto;
+        position: relative;
+        padding: 30px;
+    }
+
+    .primary {
+        font-size: 64px;
+    }
+
+    .description {
+        max-width: 100%;
+    }
+
+    /* Grilla de servicios: 2 columnas en desktop */
+    .services-grid {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .service-card {
+        flex: 1 1 calc(50% - 8px);
+    }
+
+    /* Grilla de portfolio: 2 columnas en desktop */
+    .portfolio-grid {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .project-card {
+        flex: 1 1 calc(50% - 10px);
+    }
+
+    /* About: foto a la izquierda, texto a la derecha */
+    .about-content {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    /* Contacto: items en fila */
+    .contact-links {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .contact-item {
+        flex: 1 1 200px;
+        max-width: 260px;
+    }
+}
